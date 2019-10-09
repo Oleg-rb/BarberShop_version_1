@@ -74,6 +74,9 @@ post '/visit' do
 			return erb :visit
 		end
 
+	@db = get_db
+	@db.execute 'insert into Users (name, phone, date_stamp, barber, color) values (?, ?, ?, ?, ?)', [@user_name, @phone, @date_time, @specialist, @color]
+
 	@title = "Спасибо за Ваш выбор, #{@user_name}!"
 	@message = "Ваш парикмахер #{@specialist} будет ждать Вас #{@date_time}!"
 
@@ -82,6 +85,10 @@ post '/visit' do
 	file_users.close
 
 	erb :message
+end
+
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
 end
 
 post '/contacts' do
