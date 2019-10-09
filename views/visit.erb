@@ -20,10 +20,10 @@
   <div class="form-group">
     <label for="barber">Выбор парикмахера</label>
     <select name="specialist" class="form-control ccc" >
-      <option value="" selected>Выберите Вашего парикмахера</option>
-      <option value="Walter White">Walter White</option>
-      <option value="Jessie Pinkman">Jessie Pinkman</option>
-      <option value="Gus Fring">Gus Fring</option>
+      <option value="">Выберите Вашего парикмахера</option>
+      <option value="Walter White" <%= @specialist == 'Walter White'? 'selected' : '' %>>Walter White</option>
+      <option value="Jessie Pinkman" <%= @specialist == 'Jessie Pinkman'? 'selected' : '' %>>Jessie Pinkman</option>
+      <option value="Gus Fring" <%= @specialist == 'Gus Fring'? 'selected' : '' %>>Gus Fring</option>
     </select>
   </div>
 
