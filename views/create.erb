@@ -1,0 +1,9 @@
+<h2> Text file: </h2>
+<table border = "1">
+<p>
+	<%=@logfile.each_line do |line| %>
+	<tr><td><%= line %></td></tr>
+	<%= end %>
+</p>
+</table>
+<%= @logfile.close %>

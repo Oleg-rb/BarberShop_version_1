@@ -1,0 +1,15 @@
+<h2>Контакты</h2>
+
+<form action="contacts" method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Ваш емайл</label>
+    <input name="email" type="email" class="form-control" placeholder="Введите Ваш емайл" value="<%= @email %>">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Сообщение</label>
+    <textarea name="user_message" class="form-control" rows="5" placeholder="Введите Ваше сообщение" value="<%= @user_message %>" ></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Отправить</button>
+
+</form>

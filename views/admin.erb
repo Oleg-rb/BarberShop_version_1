@@ -1,0 +1,24 @@
+<h1> Hello Admin! </h1>
+<p> Plese add your information: </p>
+
+<!-- <p> <%= @error %> </p> -->
+
+<form action = '/admin' method = 'POST'>
+
+	Your login:                                   <br />
+	<input type = "text" name = "login" />        <br />
+                                                  <br />
+	Your password:                                <br />
+	<input type = "password" name = "password" /> <br />
+	                                              <br />                                              
+    <div class="form-group">
+     <label for="exampleFormControlSelect1">Выберете нужный файл</label>
+     <select name="file" class="form-control" >
+       <option>Посетители</option>
+       <option>Контакты</option>
+     </select>
+    </div>
+
+<input type = "submit" />
+
+</form>
