@@ -1,16 +1,27 @@
 <h1> База данных клиентов </h1>
 
-<%= @results %>
+<table class="table table-striped">
+	<thead class="thead-dark">
+	    <tr>
+	      <th scope="col">№</th>
+	      <th scope="col">Имя</th>
+	      <th scope="col">Телефон</th>
+	      <th scope="col">Дата записи</th>
+	      <th scope="col">Парикмахер</th>
+	      <th scope="col">Цвет</th>
+	    </tr>
+    </thead>
 
-<table class="table">
-	<% @results.each do |row| %>
-		<tr>
-			<td><%= row['id'] %></td>
-			<td><%= row['name'] %></td>
-			<td><%= row['phone'] %></td>
-			<td><%= row['date_stamp'] %></td>
-			<td><%= row['barber'] %></td>
-			<td><%= row['color'] %></td>
-		</tr>
-	<% end %>
+    <tbody>
+	    <% @results.each do |row| %>
+			<tr>
+				<td><%= row['id'] %></td>
+				<td><%= row['name'] %></td>
+				<td><%= row['phone'] %></td>
+				<td><%= row['date_stamp'] %></td>
+				<td><%= row['barber'] %></td>
+				<td><%= row['color'] %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
