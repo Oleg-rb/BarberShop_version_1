@@ -6,6 +6,7 @@ require 'sqlite3'
 
 configure do
 	@db = SQLite3::Database.new 'barbershop.db'
+	@db.results_as_hash = true
 	@db.execute 'CREATE TABLE IF NOT EXISTS 
 	"Users" 
 	(
@@ -38,6 +39,10 @@ get '/admin' do
 	erb :admin
 end
 
+get '/showusers' do
+	erb :showusers
+end
+
 post '/visit' do
 
 	@user_name  = params[:user_name]
@@ -46,28 +51,10 @@ post '/visit' do
 	@specialist = params[:specialist]
 	@color      = params[:color]
 
-	# хеш
 	hh = { :user_name  => 'Введите Ваше имя',
 		   :phone     => 'Введите номер Вашего телефона',
 		   :date_time => 'Введите дату и время' }
 
-	# №1 способ
-	# для каждой пары ключ-значение
-	# hh.each do |key, value|
-
-	# 	если параметр пуст
-	# 	if params[key] == ''
-	# 		переменной error присвоить value из хеша hh
-	# 		(а value из хеша hh - это сообщение об ошибке)
-	# 		т.е. переменной error присвоить сообщение об ошибке
-	# 		@error = hh[key]
-
-	# 		вернуть представление visit
-	# 		return erb :visit
-	# 	end
-	# end
-
-	# №2 способ
 		@error = hh.select {|key,_| params[key] == ""}.values.join(", ")
 
 		if @error != ''
@@ -85,12 +72,6 @@ post '/visit' do
 	file_users.close
 
 	erb :message
-end
-
-def get_db
-	db = SQLite3::Database.new 'barbershop.db'
-	db.results_as_hash = true
-	return db
 end
 
 post '/contacts' do
@@ -137,6 +118,6 @@ post '/admin' do
 	end	
 end
 
-get '/showusers' do
-  erb "Hello World"
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
 end
