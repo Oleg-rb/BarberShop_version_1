@@ -14,7 +14,7 @@
 
    <div class="form-group">
     <label>Желаемые дата и время записи</label>
-    <input id="aaa" name="date_time" type="text" class="form-control" placeholder="Введите желаемые дату и время записи" value="<%= @date_time %>">
+    <input id="datetimepicker" name="date_time" type="text" class="form-control" placeholder="Введите желаемые дату и время записи" value="<%= @date_time %>">
   </div>
 
   <div class="form-group">
@@ -46,15 +46,11 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Записаться</button>
-
 </form>
 
 <script type="text/javascript">
   $(function() {
-//  $('#aaa').css('background-color', 'yellow')
-//  $('#bbb').css('background-color', 'red');
-//  $('.ccc').css('background-color', 'blue');
   $('#color').simplecolorpicker();
-//  alert($().jquery);
+  $('#datetimepicker').datetimepicker();
 })
 </script>
