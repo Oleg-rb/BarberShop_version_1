@@ -88,7 +88,9 @@ post '/visit' do
 end
 
 def get_db
-	return SQLite3::Database.new 'barbershop.db'
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
 end
 
 post '/contacts' do
@@ -133,4 +135,8 @@ post '/admin' do
 		@error ='Access denied'
 		erb :admin
 	end	
+end
+
+get '/showusers' do
+  erb "Hello World"
 end
