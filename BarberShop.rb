@@ -4,10 +4,15 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def get_db
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
+end
+
 configure do
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.results_as_hash = true
-	@db.execute 'CREATE TABLE IF NOT EXISTS 
+	db = get_db
+	db.execute 'CREATE TABLE IF NOT EXISTS 
 	"Users" 
 	(
 		"id" INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -40,6 +45,9 @@ get '/admin' do
 end
 
 get '/showusers' do
+	db = get_db
+	@results = db.execute 'select * from Users order by id desc'
+
 	erb :showusers
 end
 
@@ -61,8 +69,8 @@ post '/visit' do
 			return erb :visit
 		end
 
-	@db = get_db
-	@db.execute 'insert into Users (name, phone, date_stamp, barber, color) values (?, ?, ?, ?, ?)', [@user_name, @phone, @date_time, @specialist, @color]
+	db = get_db
+	db.execute 'insert into Users (name, phone, date_stamp, barber, color) values (?, ?, ?, ?, ?)', [@user_name, @phone, @date_time, @specialist, @color]
 
 	@title = "Спасибо за Ваш выбор, #{@user_name}!"
 	@message = "Ваш парикмахер #{@specialist} будет ждать Вас #{@date_time}!"
@@ -116,8 +124,4 @@ post '/admin' do
 		@error ='Access denied'
 		erb :admin
 	end	
-end
-
-def get_db
-	return SQLite3::Database.new 'barbershop.db'
 end
