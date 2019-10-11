@@ -4,6 +4,18 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def is_barber_exists? db, name
+	db.execute('select *from Barbers where barbers_name=?', [name]).length > 0
+end
+
+def seed_db db, barbers
+	barbers.each do |barber|
+		if !is_barber_exists? db, barber
+			db.execute 'insert into Barbers (barbers_name) values (?)', [barber]
+		end
+	end
+end
+
 def get_db
 	db = SQLite3::Database.new 'barbershop.db'
 	db.results_as_hash = true
@@ -22,6 +34,16 @@ configure do
 		"barber" TEXT, 
 		"color" TEXT
 	)'
+
+	db.execute 'CREATE TABLE IF NOT EXISTS 
+	"Barbers" 
+	(
+		"id" INTEGER PRIMARY KEY AUTOINCREMENT, 
+		"barbers_name" TEXT
+	)'
+
+	seed_db db, ['Jessie Pinkman', 'Walter White', 'Gus Fring', 'Mike Ehrmantraut']
+	db.close
 end 
 
 get '/' do
@@ -71,6 +93,7 @@ post '/visit' do
 
 	db = get_db
 	db.execute 'insert into Users (name, phone, date_stamp, barber, color) values (?, ?, ?, ?, ?)', [@user_name, @phone, @date_time, @specialist, @color]
+	db.close
 
 	@title = "Спасибо за Ваш выбор, #{@user_name}!"
 	@message = "Ваш парикмахер #{@specialist} будет ждать Вас #{@date_time}!"
