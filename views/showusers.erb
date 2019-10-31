@@ -1,6 +1,7 @@
 <h1> База данных клиентов </h1>
 
 <table class="table table-striped">
+
 	<thead class="thead-dark">
 	    <tr>
 	      <th scope="col">№</th>
@@ -14,7 +15,7 @@
 
     <tbody>
 	    <% @results.each do |row| %>
-			<tr>
+			<tr <%= "style='background-color: red; color: white;'" if row == @results.first %>>
 				<td><%= row['id'] %></td>
 				<td><%= row['name'] %></td>
 				<td><%= row['phone'] %></td>
