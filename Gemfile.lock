@@ -1,7 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+<<<<<<< HEAD
     rack (1.6.11)
+=======
+    rack (1.6.12)
+>>>>>>> parent of a843609... Update Gemfile
     rack-protection (1.5.5)
       rack
     sinatra (1.4.4)
